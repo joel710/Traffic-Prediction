@@ -1,0 +1,11 @@
+Système de prédiction trafic routier temps réel
+
+* *Type* : Time Series + Streaming
+* *Dataset* :
+  [https://www.kaggle.com/datasets/fedesoriano/traffic-prediction-dataset](https://www.kaggle.com/datasets/fedesoriano/traffic-prediction-dataset)
+* *Technos* : LSTM + Spark Streaming
+* *App* : Web map
+* *Attendu* :
+
+  * Prédiction live
+  * Visualisation carte

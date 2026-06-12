@@ -1,0 +1,6 @@
+C_NAME="joel710"
+C_EMAIL="jelise710@gmail.com"
+export GIT_AUTHOR_NAME="$C_NAME"
+export GIT_AUTHOR_EMAIL="$C_EMAIL"
+export GIT_COMMITTER_NAME="$C_NAME"
+export GIT_COMMITTER_EMAIL="$C_EMAIL"

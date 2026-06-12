@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #1a1a2e; }
+        .flow { fill: #00d4ff; }
+        .accent { fill: #ff6b9d; }
+      }
+      @media (prefers-color-scheme: light) {
+        .bg { fill: #f9f9ff; }
+        .flow { fill: #004e9f; }
+        .accent { fill: #ff6b9d; }
+      }
+      .bg { fill: #f9f9ff; }
+      .flow { fill: #004e9f; }
+      .accent { fill: #ff6b9d; }
+    </style>
+  </defs>
+  
+  <!-- Fond arrondi -->
+  <rect class="bg" width="192" height="192" rx="45"/>
+  
+  <!-- Routes convergeantes (style navigation) -->
+  <g opacity="0.8">
+    <!-- Route 1 (haut-gauche) -->
+    <path class="flow" d="M 30 60 Q 60 70 80 90" stroke-width="8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Route 2 (haut-droite) -->
+    <path class="flow" d="M 162 60 Q 132 70 112 90" stroke-width="8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Route 3 (bas-gauche) -->
+    <path class="flow" d="M 30 132 Q 60 122 80 102" stroke-width="8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Route 4 (bas-droite) -->
+    <path class="flow" d="M 162 132 Q 132 122 112 102" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Point central (jonction principale) -->
+  <circle class="accent" cx="96" cy="96" r="18"/>
+  <circle class="flow" cx="96" cy="96" r="10" opacity="0.4"/>
+  
+  <!-- Pulse animation effect (statique pour favicon, mais concept lisible) -->
+  <circle class="accent" cx="96" cy="96" r="24" fill="none" stroke-width="2" opacity="0.2"/>
+</svg>

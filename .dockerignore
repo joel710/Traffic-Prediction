@@ -1,0 +1,72 @@
+# Dependencies (installed fresh during build)
+node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Build outputs (generated during build)
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# Python virtual environments
+venv/
+.venv/
+backend_venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Git
+.git/
+.gitignore
+
+# Environment files (never in images)
+.env*
+!.env.example
+!.env.aiven
+
+# Certificates (mounted at runtime, not built in)
+certs/
+
+# Data & models (mounted at runtime, not built in)
+data/
+models/
+
+# Mini-services (built separately from their own contexts)
+mini-services/
+
+# Documentation & scripts
+*.md
+*.sh
+!preflight-check.sh
+
+# Lock files (only package.json needed for install)
+bun.lock
+
+# IDE & tools
+.claude/
+.z-ai-config/
+.vscode/
+.idea/
+
+# Misc
+download/
+examples/
+UI.html
+db/
+test/
+prompt/
+dev.log
+server.log
+
+# TypeScript cache
+tsconfig.tsbuildinfo

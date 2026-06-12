@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Road Flow - Launchpad</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "on-surface-variant": "#414753",
+                        "surface-tint": "#005cba",
+                        "secondary-fixed": "#e3e2e7",
+                        "surface-dim": "#d8d9e2",
+                        "outline-variant": "#c1c6d5",
+                        "surface-container-low": "#f2f3fc",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e2eb",
+                        "secondary-container": "#e0dfe4",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191c22",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-container": "#ffe3d6",
+                        "tertiary-container": "#af4900",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8f1",
+                        "surface-container-highest": "#e1e2eb",
+                        "surface-container": "#ecedf6",
+                        "on-primary-fixed": "#001b3e",
+                        "secondary": "#5e5e63",
+                        "tertiary": "#883700",
+                        "primary-fixed": "#d7e3ff",
+                        "inverse-on-surface": "#eff0f9",
+                        "on-primary-fixed-variant": "#00458e",
+                        "secondary-fixed-dim": "#c7c6cb",
+                        "on-tertiary-fixed-variant": "#793000",
+                        "primary-fixed-dim": "#aac7ff",
+                        "on-secondary-container": "#626267",
+                        "primary": "#004e9f",
+                        "on-tertiary-fixed": "#341100",
+                        "background": "#f9f9ff",
+                        "on-secondary-fixed-variant": "#46464b",
+                        "inverse-primary": "#aac7ff",
+                        "inverse-surface": "#2e3037",
+                        "on-primary-container": "#dfe8ff",
+                        "tertiary-fixed-dim": "#ffb692",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#0066cc",
+                        "on-error-container": "#93000a",
+                        "outline": "#727784",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191c22",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "xl": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.009em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["17px", { "lineHeight": "26px", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+                        "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Mobile Top Navigation (Hidden on md) -->
+<header class="md:hidden bg-surface/70 backdrop-blur-xl fixed top-0 w-full z-50 shadow-[0px_4px_20px_rgba(0,0,0,0.04)] bg-white/70">
+<div class="flex justify-between items-center h-16 px-gutter max-w-[1200px] mx-auto">
+<span class="font-headline-md text-headline-md tracking-tight text-on-surface">Road Flow</span>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface hover:text-primary transition-colors duration-200 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface hover:text-primary transition-colors duration-200 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden ml-xs">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIjIigkAenrORXxOBic7zLGeP_9fBjzY6K_wwTWno39H90jZXKSbxco6FYPo-eCCtUiH0SfFhvXHqMu1q4wgOrvA7DFXK-p80J0s1y52PfubrYwQcoJlz3TT1mfD_V2Qc3R5pKVJY4dDZBzvm0_gpkbi1Jw61ZpB5H0LdrHuHEFiQc2BUIn8ay1iKPVkPFltlK9S72ygNmlzb63WIMab6LhYG9ka6d0qs10847R-eVzBgdFuPmxtKcMAJdjwXk0Cwv7eNsUVhcVIXk"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Desktop Side Navigation (Hidden on mobile) -->
+<nav class="hidden md:flex flex-col py-lg px-md gap-sm bg-surface/70 backdrop-blur-xl h-screen w-64 fixed left-0 top-0 z-40 bg-white/70 border-r border-black/5 shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<!-- Header -->
+<div class="px-md mb-xl flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Road Flow</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-xs uppercase tracking-widest">Precision Traffic AI</span>
+</div>
+<!-- Main Tabs -->
+<div class="flex flex-col gap-xs flex-grow">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-secondary-container/50 transition-all text-primary font-bold active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-secondary-container/50 transition-all text-on-secondary-fixed-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+<span class="font-label-md text-label-md">Analysis</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-secondary-container/50 transition-all text-on-secondary-fixed-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">star</span>
+<span class="font-label-md text-label-md">Favorites</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-secondary-container/50 transition-all text-on-secondary-fixed-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col gap-xs pt-md border-t border-surface-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-secondary-container/50 transition-all text-on-secondary-fixed-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-secondary-container/50 transition-all text-on-secondary-fixed-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+<span class="font-label-md text-label-md">Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="pt-16 md:pt-0 md:ml-64 min-h-screen">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-xxl flex flex-col gap-xxl">
+<!-- Hero / Launchpad Header -->
+<section class="flex flex-col gap-lg items-center text-center mt-xl">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface tracking-tight">
+                    Good Morning, Jane
+                </h1>
+<!-- Minimalist Search Bar -->
+<div class="relative w-full max-w-2xl mt-sm group">
+<div class="absolute inset-y-0 left-0 pl-lg flex items-center pointer-events-none text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-lg text-body-lg rounded-[16px] py-md pl-[60px] pr-lg border-0 shadow-[0px_4px_20px_rgba(0,0,0,0.04)] focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 placeholder:text-on-surface-variant/50" placeholder="Where to?" type="text"/>
+<button class="absolute inset-y-0 right-0 pr-md flex items-center">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors bg-surface-container p-xs rounded-full">mic</span>
+</button>
+</div>
+</section>
+<!-- Quick Destinations (Bento Grid) -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Quick Routes</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Destination Card 1: Work -->
+<button class="text-left bg-surface-container-lowest rounded-[16px] p-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col gap-md relative overflow-hidden border border-transparent hover:border-black/5">
+<div class="flex justify-between items-start w-full">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<!-- Status Tag: Fluid -->
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-xs"></span>
+                                Fluid
+                            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Work</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">15 min • via US-101 N</p>
+</div>
+</button>
+<!-- Destination Card 2: Home -->
+<button class="text-left bg-surface-container-lowest rounded-[16px] p-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col gap-md relative overflow-hidden border border-transparent hover:border-black/5">
+<div class="flex justify-between items-start w-full">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<!-- Status Tag: Moderate -->
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-xs"></span>
+                                Moderate
+                            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Home</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">28 min • via I-280 S</p>
+</div>
+</button>
+<!-- Destination Card 3: Gym -->
+<button class="text-left bg-surface-container-lowest rounded-[16px] p-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col gap-md relative overflow-hidden border border-transparent hover:border-black/5">
+<div class="flex justify-between items-start w-full">
+<div class="w-12 h-12 rounded-xl bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+<!-- Status Tag: Congested -->
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-error mr-xs"></span>
+                                Congested
+                            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Gym</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">45 min • Alternative suggested</p>
+</div>
+</button>
+</div>
+</section>
+<!-- Map Overview Widget -->
+<section class="w-full h-[400px] bg-surface-container-lowest rounded-[16px] shadow-[0px_4px_20px_rgba(0,0,0,0.04)] overflow-hidden relative group border border-black/5">
+<!-- Using a placeholder pattern to represent the clean map as requested to avoid bloated data URIs, with an image generation prompt for the real asset -->
+<div class="absolute inset-0 bg-secondary-fixed/20 z-0 flex items-center justify-center overflow-hidden">
+<img alt="Map overview" class="w-full h-full object-cover opacity-80 mix-blend-multiply filter grayscale-[30%]" data-alt="A clean, minimalist digital map interface displaying the San Francisco Bay Area. The map style is highly stylized with a light mode aesthetic, using soft whites, pale grays, and subtle pastel blues for water bodies. Arterial roads are highlighted with glowing, precise lines indicating traffic flow in soft green and yellow hues. The overall mood is modern, technical, and serene, fitting a premium UI dashboard." data-location="San Francisco Bay Area" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTKJMl7i6bFWoNDmhZ5Phgc_lhd95UwTeGRyyASmh-q5CPCuYDGSx-EiQyjgQBt2eXz4KXAYeMRq_HZ3XB2Wi4lpUgmZpczGq_SGiRTdgqiJzNNoE-V_NwCPpyhq_mIOJ4lTZA3qi9ba6gFX541MaOcMYbT7cw3FXhTWAi0mUNpTk8O-2Bqvqjl0PRIzv0Ie20hQD_is6J6XwZJqizdAFqMHZX28GxueiW0fWR56Bz2jr4JVhqbWdiFFPcRTHJ8__UkMcQFZPJboLC"/>
+</div>
+<!-- Overlay UI on Map -->
+<div class="absolute top-md right-md z-10 flex gap-sm">
+<button class="w-10 h-10 bg-surface-container-lowest/90 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface shadow-sm hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">my_location</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-lowest/90 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface shadow-sm hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</button>
+</div>
+<div class="absolute bottom-md left-md z-10 bg-surface-container-lowest/90 backdrop-blur-md px-md py-sm rounded-[12px] shadow-sm flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-label-md text-label-md text-on-surface">Live Traffic Analysis Active</span>
+</div>
+</section>
+</div>
+</main>
+</body></html>
