@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Road Flow - Real-Time Traffic Prediction",
-  description: "Professional real-time traffic prediction system using LSTM neural networks. Precision Traffic AI for urban navigation.",
-  keywords: ["Traffic Prediction", "LSTM", "Neural Network", "Real-time", "Navigation", "AI"],
+  description: "Professional real-time traffic prediction system using Graph Neural Networks (GNN). Precision Traffic AI for urban navigation.",
+  keywords: ["Traffic Prediction", "GNN", "Graph Neural Network", "Real-time", "Navigation", "AI"],
   authors: [{ name: "Traffic AI Team" }],
   icons: {
     icon: "/favicon.svg",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Road Flow - Traffic Prediction",
-    description: "Real-time traffic prediction with LSTM neural networks",
+    description: "Real-time traffic prediction with Graph Neural Networks (GNN)",
     type: "website",
     images: [
       {

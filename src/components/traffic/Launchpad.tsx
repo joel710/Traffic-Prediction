@@ -115,7 +115,7 @@ export function Launchpad() {
               Good Morning, <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Joel</span>
             </h1>
             <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-xl">
-              Real-time traffic predictions powered by LSTM neural networks
+              Real-time traffic predictions powered by Graph Neural Networks (GNN)
             </p>
 
             {/* Search bar (UI.html inspired) */}
@@ -200,29 +200,10 @@ export function Launchpad() {
             </div>
           </section>
 
-          {/* ── All Junctions Grid ── */}
-          <section>
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-5 md:mb-6">All Junctions</h2>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 md:gap-4">
-              {ALL_JUNCTIONS.map((j) => (
-                <button
-                  key={j.id}
-                  onClick={() => navigateToDashboard(j.id)}
-                  className="group relative bg-white dark:bg-slate-800 rounded-xl p-3 md:p-4 shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-blue-600/40 dark:hover:border-cyan-500/40"
-                >
-                  <div className="text-2xl md:text-3xl mb-1.5 text-center">{j.icon}</div>
-                  <p className="text-[11px] md:text-xs font-semibold text-slate-900 dark:text-white text-center truncate">
-                    J{j.id}
-                  </p>
-                  <div className={`w-1.5 h-1.5 rounded-full mx-auto mt-1 ${statusDot(j.status)}`} />
-                </button>
-              ))}
-            </div>
-          </section>
 
           {/* Footer */}
           <footer className="text-center text-xs text-slate-400 dark:text-slate-600 pb-8">
-            <p>Road Flow • Precision Traffic AI • Running on LSTM Neural Network</p>
+            <p>Road Flow • Precision Traffic AI • Running on GNN Inference Engine</p>
           </footer>
         </div>
       </main>
