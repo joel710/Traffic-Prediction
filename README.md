@@ -459,6 +459,8 @@ Aucun changement de code nécessaire — la chaîne de fallback d'authentificati
 ├── ARCHITECTURE.md              # Conception haut niveau (FR)
 ├── docs/
 │   ├── DOCKER.md                # Architecture Docker complète (FR)
+│   ├── GNN.md                   # Architecture du modèle TrafficGNN (FR)
+│   ├── NOTEBOOK.md              # Entraînement et notebook (FR)
 │   ├── BACKEND.md               # Plongée dans le backend
 │   ├── FRONTEND.md              # Architecture frontend
 │   └── INTEGRATION.md           # Cycle de vie des données (FR)

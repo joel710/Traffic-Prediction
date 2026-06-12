@@ -26,7 +26,7 @@ Pour maintenir un taux de rafraîchissement de 60 FPS sans geler l'interface, un
 
 ### 4. Composants d'Interface (UI)
 - **Dashboard de Trafic** : Panneau latéral affichant les métriques en direct, l'état des intersections et la santé globale du système.
-- **Analyse de Prédiction** : Affichage des courbes de tendances et des volumes prédits.
+- **Analyse de Prédiction** : Affichage des courbes de tendances et des volumes prédits par le modèle **TrafficGNN** (voir [GNN.md](./GNN.md)).
 - **Interactivité** : Possibilité de zoomer sur des zones spécifiques pour observer la simulation 3D de près.
 
 ## 📊 Flux de Rendu Frontend
