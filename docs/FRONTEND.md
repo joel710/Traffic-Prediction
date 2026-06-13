@@ -2,7 +2,7 @@
 
 Ce document décrit la conception et l'implémentation de l'interface utilisateur, un tableau de bord interactif haute performance dédié à la visualisation du flux de trafic urbain en 3D.
 
-## 🏗️ Architecture Logicielle
+##  Architecture Logicielle
 
 ### 1. Framework de Base (Next.js 15)
 L'application repose sur **Next.js 15** utilisant l'App Router.
@@ -29,7 +29,7 @@ Pour maintenir un taux de rafraîchissement de 60 FPS sans geler l'interface, un
 - **Analyse de Prédiction** : Affichage des courbes de tendances et des volumes prédits par le modèle **TrafficGNN** (voir [GNN.md](./GNN.md)).
 - **Interactivité** : Possibilité de zoomer sur des zones spécifiques pour observer la simulation 3D de près.
 
-## 📊 Flux de Rendu Frontend
+##  Flux de Rendu Frontend
 
 ```mermaid
 graph LR
@@ -40,7 +40,7 @@ graph LR
     D & E -->|Fusion| F[Affichage Utilisateur]
 ```
 
-## 🛠️ Stack Technique
+##  Stack Technique
 - **Framework** : Next.js 15 (React)
 - **Langage** : TypeScript (pour la robustesse du typage des données de trafic)
 - **Cartographie** : MapLibre GL
@@ -48,7 +48,7 @@ graph LR
 - **Stylisation** : Tailwind CSS
 - **Iconographie** : Lucide React
 
-## 📈 Optimisations de Performance
+##  Optimisations de Performance
 - **Build Standalone** : Utilisation du mode `standalone` de Next.js pour réduire la taille de l'image Docker et la consommation mémoire.
 - **Accélération Matérielle** : Tout le rendu 3D est déporté sur le GPU via WebGL.
 - **Mises à jour Ciblées** : Utilisation d'un graphe de scène optimisé dans Three.js pour ne modifier que les propriétés de transformation des objets impactés.
