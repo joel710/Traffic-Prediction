@@ -21,7 +21,7 @@ Kafka sert de colonne vertébrale au système, assurant le découplage total ent
 
 ### 3. Processeur de Streaming : Apache Spark (`mini-services/spark`)
 Le "cerveau" analytique du système, effectuant l'inférence ML en temps réel.
-- **Modèle Prédictif** : Utilisation d'un **GNN (Graph Neural Network)** — `TrafficGNN` — implémenté via PyTorch (`gnn_model.pth`, 102k paramètres) avec normalisation par scaler Scikit-Learn (`scaler_y.pkl`).
+- **Modèle Prédictif** : Utilisation d'un **GNN (Graph Neural Network)**  `TrafficGNN`  implémenté via PyTorch (`gnn_model.pth`, 102k paramètres) avec normalisation par scaler Scikit-Learn (`scaler_y.pkl`).
 - **Logique de Traitement** :
   - **Fenêtrage (Windowing)** : Spark agrège une fenêtre glissante de 24 pas de temps par intersection.
   - **Features (14 dimensions)** : Encodages cycliques (heure, jour, mois), lags (1, 2, 3, 24), moyennes mobiles (6, 24), différence première.
@@ -50,13 +50,13 @@ graph TD
     F -->|Push| H[Client WebSocket]
 ```
 
-## 🛠️ Spécifications Techniques
+##  Spécifications Techniques
 - **Langage** : Python 3.11+
 - **Framework** : FastAPI
 - **Streaming** : Apache Kafka & PySpark
-- **Apprentissage Profond** : PyTorch (TrafficGNN — GCNConv)
+- **Apprentissage Profond** : PyTorch (TrafficGNN  GCNConv)
 - **Conteneurisation** : Docker (Multi-stage build pour optimiser la taille des images)
 
-## 🔄 Résilience et Robustesse
+## Résilience et Robustesse
 - **Mécanisme de Wait-for-Kafka** : L'API et le Simulateur implémentent une logique de tentative (retries) pour éviter le crash système si Kafka n'est pas encore totalement opérationnel au démarrage.
 - **Flexibilité d'Authentification** : Support natif du mTLS (pour Aiven Cloud) et du mode Plaintext (pour le développement local Docker).
