@@ -1,4 +1,4 @@
-# 🧠 TrafficGNN — Documentation du Modèle
+# 🧠 TrafficGNN Documentation du Modèle
 
 ## Table des matières
 
