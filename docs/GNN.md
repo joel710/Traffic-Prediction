@@ -156,7 +156,7 @@ node_emb = h_n[-1]                      # (B*4, 96)
 node_emb = node_emb.view(B, N, -1)     # (B, 4, 96)
 ```
 
-### Étape 2 : GCN — Propagation spatiale
+### Étape 2 : GCN Propagation spatiale
 
 Les embeddings sont propagés entre les junctions via le graphe routier.
 
