@@ -2,7 +2,7 @@
 
 Ce document décrit l'interconnexion des différents modules du projet et analyse le cycle de vie d'une donnée, depuis sa source brute jusqu'à sa représentation visuelle finale.
 
-## 🌊 Le Pipeline de Données End-to-End
+## Le Pipeline de Données End-to-End
 
 Le système suit un flux linéaire et asynchrone, optimisé pour le traitement en temps réel. Le cheminement d'une donnée peut être résumé comme suit :
 
@@ -32,7 +32,7 @@ Le frontend transforme la donnée numérique en une expérience visuelle.
 - **Projection** : L'ID de l'intersection est converti en coordonnées GPS.
 - **Animation** : Le moteur Three.js ajuste la vitesse et la densité des voitures 3D pour refléter le volume prédit.
 
-## 📊 Schéma Global d'Architecture
+##  Schéma Global d'Architecture
 
 ```mermaid
 graph TD
@@ -61,7 +61,7 @@ graph TD
     style UI fill:#ddf,stroke:#333,stroke-width:2px
 ```
 
-## 📋 Spécifications des Formats de Données
+##  Spécifications des Formats de Données
 
 Pour un usage académique, voici la structure exacte des messages transitant dans le système :
 
