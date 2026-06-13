@@ -2,7 +2,7 @@
 
 Ce document présente l'architecture technique du backend, conçue comme un pipeline de données en temps réel suivant le paradigme de l'**Architecture Kappa**. L'objectif est de transformer un flux brut de données de capteurs de trafic en prédictions exploitables via un processus de streaming distribué.
 
-## 🏗️ Composants du Système
+## Composants du Système
 
 ### 1. Simulateur de Trafic (`mini-services/simulator`)
 Le simulateur agit comme une abstraction des capteurs physiques installés aux intersections urbaines.
@@ -37,7 +37,7 @@ Une interface haute performance basée sur FastAPI faisant le pont entre le mond
   - **REST API** : Pour la récupération de l'état initial et des historiques.
   - **WebSockets** : Pour le push temps réel des prédictions vers le frontend.
 
-## 📊 Schéma de Flux Backend
+## Schéma de Flux Backend
 
 ```mermaid
 graph TD
