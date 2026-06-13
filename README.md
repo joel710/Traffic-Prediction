@@ -2,7 +2,7 @@
 
 **Road Flow** est un système de prédiction de trafic routier en temps réel qui diffuse des données de capteurs via Apache Kafka, exécute l'inférence d'un **GNN (Graph Neural Network)** avec PySpark Structured Streaming, et visualise les prédictions sur un tableau de bord 3D interactif.
 
-Le système suit une **architecture Kappa** — tout est un flux, pas de batch, pas de base de données. Du CSV à la visualisation 3D en moins de 500ms.
+Le système suit une **architecture Kappa**  tout est un flux, pas de batch, pas de base de données. Du CSV à la visualisation 3D en moins de 500ms.
 
 ```
 ┌──────────┐    ┌──────────┐    ┌──────────────────┐    ┌──────────┐    ┌───────────┐    ┌──────────┐
@@ -89,8 +89,8 @@ Ouvre ensuite **http://localhost:3000/dashboard**.
 ```
 
 Le système utilise **deux topics Kafka** :
-- `flux_data` — relevés bruts des capteurs (produit par le Simulateur, consommé par Spark)
-- `traffic_predictions` — sorties du modèle (produit par Spark, consommé par FastAPI)
+- `flux_data`  relevés bruts des capteurs (produit par le Simulateur, consommé par Spark)
+- `traffic_predictions` sorties du modèle (produit par Spark, consommé par FastAPI)
 
 ---
 
@@ -98,10 +98,10 @@ Le système utilise **deux topics Kafka** :
 
 ### 1. Simulateur (`mini-services/simulator/simulator.py`)
 
-Lit un fichier CSV et publie chaque ligne dans le topic Kafka `flux_data` avec un délai configurable — simulant l'ingestion temps réel de capteurs.
+Lit un fichier CSV et publie chaque ligne dans le topic Kafka `flux_data` avec un délai configurable simulant l'ingestion temps réel de capteurs.
 
 ```python
-# Boucle de publication principale — une ligne CSV par tick
+# Boucle de publication principale  une ligne CSV par tick
 async def run(self):
     df = pd.read_csv(CSV_PATH)
     df["DateTime"] = pd.to_datetime(df["DateTime"])
@@ -155,7 +155,7 @@ Chaque message publié dans `flux_data` ressemble à :
 }
 ```
 
-> **14 features** — 6 encodages cycliques temporels (heure, jour de la semaine, mois), 1 binaire (week-end), 7 statistiques dérivées des véhicules (lags, moyennes mobiles, différence première).
+> **14 features**  6 encodages cycliques temporels (heure, jour de la semaine, mois), 1 binaire (week-end), 7 statistiques dérivées des véhicules (lags, moyennes mobiles, différence première).
 
 ---
 
@@ -187,7 +187,7 @@ query = json_df.writeStream \
 query.awaitTermination()
 ```
 
-**Extraction des features** — chaque ligne Kafka brute est convertie en un vecteur à 14 dimensions :
+**Extraction des features**  chaque ligne Kafka brute est convertie en un vecteur à 14 dimensions :
 
 ```python
 FEATURE_COLS = [
@@ -201,7 +201,7 @@ def extract_14_features(row_dict: dict) -> np.ndarray:
     return np.array([float(row_dict.get(c) or 0) for c in FEATURE_COLS], dtype=np.float32)
 ```
 
-**Inférence GNN** — s'exécute quand les 4 junctions ont bufferisé 24 pas temporels :
+**Inférence GNN**  s'exécute quand les 4 junctions ont bufferisé 24 pas temporels :
 
 ```python
 @torch.no_grad()
@@ -254,7 +254,7 @@ class TrafficGNN(nn.Module):
         return x  # (B, N, 1)
 ```
 
-> **Paramètres** : 102 017 — presque tous dans la couche de projection temporelle.
+> **Paramètres** : 102 017  presque tous dans la couche de projection temporelle.
 
 ---
 
@@ -270,7 +270,7 @@ history: dict[int, deque] = defaultdict(          # junction → 2000 dernières
 )
 ```
 
-**Pont Consumer Kafka → asyncio** — un thread d'arrière-plan interroge Kafka et distribue dans la boucle d'événements asyncio :
+**Pont Consumer Kafka → asyncio**  un thread d'arrière-plan interroge Kafka et distribue dans la boucle d'événements asyncio :
 
 ```python
 def kafka_listener(loop):
@@ -286,7 +286,7 @@ def kafka_listener(loop):
         asyncio.run_coroutine_threadsafe(broadcast_queue.put(data), loop)
 ```
 
-**Diffusion WebSocket** — distribue les prédictions à tous les clients connectés :
+**Diffusion WebSocket**  distribue les prédictions à tous les clients connectés :
 
 ```python
 async def broadcast_worker():
@@ -315,7 +315,7 @@ async def websocket_endpoint(ws: WebSocket):
         websocket_clients.discard(ws)
 ```
 
-**Auth Kafka** — s'adapte transparentement au local (PLAINTEXT) ou au cloud Aiven (SSL/SASL) :
+**Auth Kafka**  s'adapte transparentement au local (PLAINTEXT) ou au cloud Aiven (SSL/SASL) :
 
 ```python
 def build_kafka_consumer() -> KafkaConsumer:
@@ -340,9 +340,9 @@ def build_kafka_consumer() -> KafkaConsumer:
 
 Une application **Next.js 15** au rendu hybride. Le tableau de bord utilise :
 
-- **MapLibre GL** — carte 2D avec marqueurs de junctions colorés par niveau de congestion
-- **Three.js** — modèles de voitures 3D animées sur le réseau routier à 60 FPS
-- **Recharts** — graphiques sparkline pour l'historique du trafic par junction
+- **MapLibre GL**  carte 2D avec marqueurs de junctions colorés par niveau de congestion
+- **Three.js**  modèles de voitures 3D animées sur le réseau routier à 60 FPS
+- **Recharts**  graphiques sparkline pour l'historique du trafic par junction
 
 **Connexion WebSocket avec reconnexion automatique :**
 
@@ -361,7 +361,7 @@ useEffect(() => {
 }, []);
 ```
 
-**Métriques de précision du modèle en direct** — buffer glissant de 200 échantillons :
+**Métriques de précision du modèle en direct**  buffer glissant de 200 échantillons :
 
 ```typescript
 const errorsBuffer: number[] = [];
@@ -387,7 +387,7 @@ const accuracy = Math.max(0, 100 - mae);  // % de précision simplifié
 
 ### 5. Kafka (`docker-compose.yml`)
 
-Fonctionne en mode **KRaft** (pas de Zookeeper) — plus léger et plus rapide.
+Fonctionne en mode **KRaft** (pas de Zookeeper)  plus léger et plus rapide.
 
 ```yaml
 kafka:
@@ -402,7 +402,7 @@ kafka:
     CLUSTER_ID: road-traffic-pred-01
 ```
 
-Les topics sont **créés automatiquement** au premier usage — aucune configuration manuelle nécessaire.
+Les topics sont **créés automatiquement** au premier usage  aucune configuration manuelle nécessaire.
 
 ---
 
@@ -483,15 +483,15 @@ Aucun changement de code nécessaire — la chaîne de fallback d'authentificati
 
 | Symptôme | Solution |
 |---|---|
-| `Failed to create new KafkaAdminClient` | Lancer `docker compose up -d` — Kafka doit être en cours d'exécution |
+| `Failed to create new KafkaAdminClient` | Lancer `docker compose up -d`  Kafka doit être en cours d'exécution |
 | Port 3000/8000 déjà utilisé | Changer les ports dans `docker-compose.yml` |
 | Spark plante au démarrage | Allouer au moins 4 Go de RAM à Docker |
-| Aucune donnée sur le tableau de bord | Vérifier `make logs` — le simulateur doit publier dans `flux_data` |
-| Avertissement de version sklearn | Sans danger — le décalage de version est cosmétique |
+| Aucune donnée sur le tableau de bord | Vérifier `make logs` le simulateur doit publier dans `flux_data` |
+| Avertissement de version sklearn | Sans danger  le décalage de version est cosmétique |
 
 ---
 
 ## ✍️ Auteurs
 
-- **Joel ADZONYA** — Recherche IA & Infrastructure principale
-- **Ghislaine EKLOU** — Ingénierie des données & Conception de la visualisation
+- **Joel ADZONYA**  Recherche IA & Infrastructure principale
+- **Ghislaine EKLOU**  Ingénierie des données & Conception de la visualisation
