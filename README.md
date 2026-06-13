@@ -491,7 +491,7 @@ Aucun changement de code nécessaire — la chaîne de fallback d'authentificati
 
 ---
 
-## ✍️ Auteurs
+## Auteurs
 
 - **Joel ADZONYA**  Recherche IA & Infrastructure principale
 - **Ghislaine EKLOU**  Ingénierie des données & Conception de la visualisation
