@@ -1,4 +1,4 @@
-# 🐳 Documentation Docker — Road Flow
+# 🐳 Documentation Docker   Road Flow
 
 ## Table des matières
 
@@ -12,7 +12,7 @@
 8. [Profiles Docker Compose](#8-profiles-docker-compose)
 9. [Variables d'environnement](#9-variables-denvironnement)
 10. [Build et optimisation](#10-build-et-optimisation)
-11. [Makefile — commandes de gestion](#11-makefile--commandes-de-gestion)
+11. [Makefile   commandes de gestion](#11-makefile--commandes-de-gestion)
 12. [Dépannage Docker](#12-dépannage-docker)
 13. [Scénarios d'utilisation](#13-scénarios-dutilisation)
 
@@ -26,7 +26,7 @@ Le projet **Road Flow** est entièrement conteneurisé avec Docker. Il se compos
 
 | Service | Image | Build context | Dépend de | Profil |
 |---|---|---|---|---|
-| `kafka` | `apache/kafka:3.8.0` | — (image officielle) | — | *par défaut* |
+| `kafka` | `apache/kafka:3.8.0` |   (image officielle) |   | *par défaut* |
 | `frontend` | `road-traffic-pred-frontend` | `.` (racine) | `backend` | *par défaut* |
 | `backend` | `road-traffic-pred-backend` | `./mini-services/api` | `kafka` (healthy) | *par défaut* |
 | `simulator` | `road-traffic-pred-simulator` | `./mini-services/simulator` | `kafka` + `backend` | `full` |
@@ -120,12 +120,12 @@ Tous les services utilisent `restart: unless-stopped`. Cela signifie :
 
 ## 3. Analyse détaillée des Dockerfiles
 
-### 3.1 Frontend (`Dockerfile` — racine du projet)
+### 3.1 Frontend (`Dockerfile`   racine du projet)
 
 **Type :** Multi-stage build (2 stages)
 
 ```dockerfile
-# Stage 1 : Builder — installation des dépendances + compilation Next.js
+# Stage 1 : Builder   installation des dépendances + compilation Next.js
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -133,7 +133,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm install
 
 COPY . .
 
-# Génération du client Prisma (optionnel — ne bloque pas si absent)
+# Génération du client Prisma (optionnel   ne bloque pas si absent)
 ARG DATABASE_URL=file:./db/custom.db
 RUN npx prisma generate 2>/dev/null || echo "  ⚡ No Prisma schema found, skipping"
 
@@ -148,7 +148,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npx next build
 # Copie des artefacts standalone
 RUN cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/
 
-# Stage 2 : Runner — image de production minimale
+# Stage 2 : Runner   image de production minimale
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
@@ -295,7 +295,7 @@ joblib==1.3.2
 python-dotenv==1.0.0
 ```
 
-### 3.5 Kafka — image officielle
+### 3.5 Kafka   image officielle
 
 Le service `kafka` utilise l'image officielle `apache/kafka:3.8.0` sans Dockerfile personnalisé.
 
@@ -472,9 +472,9 @@ docker compose --profile full ps
 ```
 
 La colonne `STATUS` montre :
-- `Up` — le conteneur tourne
-- `Up (healthy)` — le conteneur tourne ET le healthcheck passe
-- `Up (unhealthy)` — le conteneur tourne mais le healthcheck échoue
+- `Up`   le conteneur tourne
+- `Up (healthy)`   le conteneur tourne ET le healthcheck passe
+- `Up (unhealthy)`   le conteneur tourne mais le healthcheck échoue
 
 ---
 
@@ -705,7 +705,7 @@ mini-services/         # Build séparé (contexte différent)
 
 **Pourquoi c'est important** : le contexte de build (tout ce qui est envoyé au daemon Docker) est plus rapide à transférer. Sans `.dockerignore`, le `COPY . .` inclurait `node_modules` (500+ Mo) et ralentirait considérablement le build.
 
-### 10.4 Spark — pré-téléchargement des JARs
+### 10.4 Spark   pré-téléchargement des JARs
 
 ```dockerfile
 RUN mkdir -p /app/jars && \
@@ -714,7 +714,7 @@ RUN mkdir -p /app/jars && \
 
 **Pourquoi ?** Spark télécharge les connecteurs Kafka au moment du `readStream.format("kafka")`. Ce téléchargement runtime peut échouer si le DNS ne résout pas `repo1.maven.org` (problème fréquent dans les conteneurs Docker). En les pré-téléchargeant au build, on garantit leur disponibilité.
 
-### 10.5 Spark — sécurité simplifiée
+### 10.5 Spark   sécurité simplifiée
 
 ```yaml
 environment:
@@ -726,7 +726,7 @@ En mode `local[*]`, Spark n'a pas besoin d'authentifier ou chiffrer ses communic
 
 ---
 
-## 11. Makefile — commandes de gestion
+## 11. Makefile   commandes de gestion
 
 ### 11.1 Tableau des commandes
 
@@ -887,7 +887,7 @@ make rebuild
 │    frontend:       road-traffic-pred-frontend  :3000                       │
 │    backend:        road-traffic-pred-backend   :8000                       │
 │    simulator:      road-traffic-pred-simulator :8001  [profil: full]       │
-│    spark-processor:road-traffic-pred-spark     :—      [profil: full]      │
+│    spark-processor:road-traffic-pred-spark     :       [profil: full]      │
 │                                                                            │
 │  volumes:  kafka_data                                                      │
 │                                                                            │
